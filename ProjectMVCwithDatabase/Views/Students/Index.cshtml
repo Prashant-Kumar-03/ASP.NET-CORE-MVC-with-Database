@@ -1,0 +1,40 @@
+﻿@model List<ProjectMVCwithDatabase.Models.Student>
+
+@{
+    ViewData["Title"] = "Students List";
+}
+
+<h2>Students List</h2>
+
+<a class="btn btn-primary mb-2" asp-action="Create">+ Add New Student</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Roll Number</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.RollNumber</td>
+                <td>@student.Name</td>
+                <td>@student.Gender</td>
+                <td>@student.DateOfBirth.ToShortDateString()</td>
+                <td>@student.Phone</td>
+                <td>@student.Email</td>
+                <td>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@student.RollNumber">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@student.RollNumber">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
