@@ -3,7 +3,12 @@
 @{
     ViewData["Title"] = "Students List";
 }
-
+@if (TempData["success"] != null)
+{
+    <div style="color: green; font-weight: bold; margin-bottom: 10px;">
+        @TempData["success"]
+    </div>
+}
 <h2>Students List</h2>
 
 <a class="btn btn-primary mb-2" asp-action="Create">+ Add New Student</a>

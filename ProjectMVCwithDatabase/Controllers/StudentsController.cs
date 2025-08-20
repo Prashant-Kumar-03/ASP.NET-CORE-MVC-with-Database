@@ -24,13 +24,28 @@ namespace ProjectMVCwithDatabase.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            int maxRollNumber = 0;
+            if (_dbContext.Students.Any())
+            {
+                maxRollNumber = _dbContext.Students.Max(s => s.RollNumber);
+            }
+
+            var student = new Student
+            {
+                RollNumber = maxRollNumber + 1
+            };
+            return View(student);
         }
 
         // Save new student
         [HttpPost]
         public IActionResult Create(Student student)
         {
+            // Check if roll number already exists
+            if (_dbContext.Students.Any(s => s.RollNumber == student.RollNumber))
+            {
+                ModelState.AddModelError("RollNumber", "Roll Number taken, choose another!!!.");
+            }
 
             if (ModelState.IsValid)
             {
@@ -86,8 +101,12 @@ namespace ProjectMVCwithDatabase.Controllers
             ModelState.Remove("Password");
             ModelState.Remove("ConfirmPassword");
 
+        
+
             if (!ModelState.IsValid)
                 return View(student);
+
+
 
             var existingStudent = _dbContext.Students.Find(student.Id);
             if (existingStudent == null)
