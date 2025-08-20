@@ -7,7 +7,17 @@
 <h2>Edit Student</h2>
 
 <form asp-action="Edit" method="post">
-    <input asp-for="RollNumber" type="hidden" />
+    
+    <input asp-for="Id" type="hidden" />
+    @* <input asp-for="RollNumber" type="hidden" /> *@
+    <div class="form-group">
+        <label>Roll Number</label>
+        <input asp-for="RollNumber" class="form-control" disabled /> <!-- user sees it -->
+        <input type="hidden" asp-for="RollNumber" /> <!-- actual value sent -->
+        <span asp-validation-for="RollNumber" class="text-danger"></span>
+    </div>
+
+
 
     <div class="form-group">
         <label>Name</label>
@@ -23,7 +33,9 @@
 
     <div class="form-group">
         <label>Date of Birth</label>
-        <input asp-for="DateOfBirth" type="date" class="form-control" />
+        @* <input asp-for="DateOfBirth" type="date" class="form-control" /> *@
+        @* <input asp-for="DateOfBirth" type="date" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" /> *@
+        <input asp-for="DateOfBirth" type="date" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
     </div>
 
@@ -41,5 +53,6 @@
 
     <br />
     <button type="submit" class="btn btn-primary">Update</button>
+    @* <a asp-action="Index" class="btn btn-secondary">Back</a> *@
     <a asp-action="Index" class="btn btn-secondary">Back</a>
 </form>

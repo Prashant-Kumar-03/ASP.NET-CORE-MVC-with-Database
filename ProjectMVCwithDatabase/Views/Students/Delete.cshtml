@@ -6,8 +6,10 @@
 
 <h2>Edit Student</h2>
 
-<form asp-action="Edit" method="post">
-    <input asp-for="RollNumber" type="hidden" />
+<form asp-action="Delete" method="post">
+    @* <input asp-for="RollNumber" type="hidden" /> *@
+    <input asp-for="Id" type="hidden" />
+
 
     <div class="form-group">
         <label>Name</label>
@@ -40,6 +42,6 @@
     </div>
 
     <br />
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-controller="Students" asp-action="Index" class="btn btn-secondary">Back</a>
 </form>

@@ -31,6 +31,7 @@ namespace ProjectMVCwithDatabase.Controllers
         [HttpPost]
         public IActionResult Create(Student student)
         {
+
             if (ModelState.IsValid)
             {
                 _dbContext.Students.Add(student);
@@ -55,23 +56,56 @@ namespace ProjectMVCwithDatabase.Controllers
             {
                 return NotFound();
             }
+                     
 
             return View(student);
+            
         }
 
         // Save edited student
+        //[HttpPost]
+        //public IActionResult Edit(Student student)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _dbContext.Students.Update(student);
+        //        _dbContext.SaveChanges();
+        //        TempData["success"] = "Student updated successfully!";
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(student);
+
+        //}
+
+
         [HttpPost]
         public IActionResult Edit(Student student)
         {
-            if (ModelState.IsValid)
-            {
-                _dbContext.Students.Update(student);
-                _dbContext.SaveChanges();
-                TempData["success"] = "Student updated successfully!";
-                return RedirectToAction("Index");
-            }
-            return View();
+            // Remove validation for Password and ConfirmPassword
+            ModelState.Remove("Password");
+            ModelState.Remove("ConfirmPassword");
+
+            if (!ModelState.IsValid)
+                return View(student);
+
+            var existingStudent = _dbContext.Students.Find(student.Id);
+            if (existingStudent == null)
+                return NotFound();
+
+            // Update only editable fields (excluding password)
+            existingStudent.Name = student.Name;
+            existingStudent.Gender = student.Gender;
+            existingStudent.DateOfBirth = student.DateOfBirth;
+            existingStudent.Phone = student.Phone;
+            existingStudent.Email = student.Email;
+
+            _dbContext.SaveChanges();
+            TempData["success"] = "Student updated successfully!";
+            return RedirectToAction("Index");
         }
+
+
 
         // Show delete confirmation
         public IActionResult Delete(int? id)

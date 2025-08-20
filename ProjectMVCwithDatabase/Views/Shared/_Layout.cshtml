@@ -45,10 +45,21 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @* <footer class="border-top footer text-muted"> *@
+    @*     <div class="container text-center py-3"> *@
+    @*         <p class="mb-1">Made with ❤️ by Prashant Kumar — Last updated on <b>26-07-2025</b></p> *@
+
+    @*         <p> *@
+    @*             <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> | *@
+    @*             📧 <a href="mailto:prashant2003.hyd@gmail.com">prashant2003.hyd@gmail.com</a> *@
+    @*             <a href="https://www.linkedin.com/in/prashant-kumar-65844b2a3/" target="_blank">🔗 LinkedIn</a> *@
+    @*         </p> *@
+    @*     </div> *@
+    @* </footer> *@
+
+    <footer class="border-top footer text-muted fixed-footer">
         <div class="container text-center py-3">
             <p class="mb-1">Made with ❤️ by Prashant Kumar — Last updated on <b>26-07-2025</b></p>
-
             <p>
                 <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> |
                 📧 <a href="mailto:prashant2003.hyd@gmail.com">prashant2003.hyd@gmail.com</a>
@@ -56,6 +67,22 @@
             </p>
         </div>
     </footer>
+
+    <style>
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 70px; /* Adjust based on your footer’s actual height */
+            background-color: #f8f9fa; /* Optional background color */
+            z-index: 1030;
+        }
+
+        body {
+            padding-bottom: 70px; /* Same as footer height to keep content visible */
+        }
+    </style>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
